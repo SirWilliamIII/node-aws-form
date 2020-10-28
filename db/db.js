@@ -95,7 +95,7 @@ function getAllfromTable(table) {
             console.error("Unable to find movies", e)
         } else {
             console.log(`Found ${data.Count} movies`)
-            console.log(data.Items)
+            return data.Items
         }
     })
 }
