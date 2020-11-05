@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const nodeGeocoder = require('node-geocoder')
 
 
 const db = require("../db/db")
@@ -21,9 +22,34 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/submit', (req, res) => {
-    addEntry('place', req.body.city, req.body.country, "100.123", "100.123")
-    console.log('City: ' + req.body.city)
-    console.log('Password: ' + req.body.country)
+
+    const city = req.body.city
+    const country = req.body.country
+
+
+    let options = {
+        provider: 'openstreetmap'
+    }
+
+    let geoCoder = nodeGeocoder(options)
+
+    const place = city + ", " + country
+
+    geoCoder.geocode(place)
+
+    .then(res => {
+            const lat = res[0].latitude
+            const lng = res[0].longitude
+            const today = new Date()
+            addEntry('place', req.body.city, req.body.country, lat.toString(), lng.toString(), today.toString())
+        })
+        .catch(e => {
+            console.log(e)
+        })
+
+
+    // console.log('City: ' + req.body.city)
+    // console.log('Password: ' + req.body.country)
     res.redirect('/')
 })
 

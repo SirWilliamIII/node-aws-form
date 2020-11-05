@@ -51,7 +51,7 @@ function getEntryByKey(tableName, key) {
 }
 
 
-function addEntry(table, city, country, latitude, longitude) {
+function addEntry(table, city, country, latitude, longitude, dateVisited) {
     const params = {
         TableName: table,
         Item: {
@@ -69,7 +69,7 @@ function addEntry(table, city, country, latitude, longitude) {
                 S: country
             },
             dateVisited: {
-                S: "2020-02-07"
+                S: dateVisited
             },
 
 
