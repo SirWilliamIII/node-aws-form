@@ -33,6 +33,7 @@ function createTable(tableName) {
 }
 
 function getEntryByKey(tableName, key) {
+    let items = []
     const params = {
         TableName: tableName,
         Key: {
@@ -45,13 +46,15 @@ function getEntryByKey(tableName, key) {
         if (e) {
             console.error("Unable to find movie")
         } else {
-            console.log("Found movie", data.Item)
+            items = data.Item
+
         }
     })
+    return items
 }
 
 
-function addEntry(table, city, country, latitude, longitude, dateVisited) {
+function addEntry(table, city, country, latitude, longitude, dateVisited, notes) {
     const params = {
         TableName: table,
         Item: {
@@ -87,6 +90,7 @@ function addEntry(table, city, country, latitude, longitude, dateVisited) {
 
 
 function getAllfromTable(table) {
+    let items = []
     const params = {
         TableName: table
     }
@@ -94,10 +98,12 @@ function getAllfromTable(table) {
         if (e) {
             console.error("Unable to find movies", e)
         } else {
-            console.log(`Found ${data.Count} movies`)
-            return data.Items
+            console.log(`Found ${data.Items} movies`)
+            items = data.Items
+
         }
     })
+    return items
 }
 
 

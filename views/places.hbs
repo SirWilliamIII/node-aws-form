@@ -1,14 +1,14 @@
 <section>
-    <div class="containers">
-        <div class="container">
+	<div class="containers">
+		<div class="container">
+			{{title}}
+			<ul>
+				{{#each place}}
+				<li>{{this}}</li>
 
-            <ul>
-                {{#each place}}
+				{{/each}}
 
-                <li>{{this}}</li>
-                {{/each}}
-
-            </ul>
-        </div>
-    </div>
+			</ul>
+		</div>
+	</div>
 </section>
